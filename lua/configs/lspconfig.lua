@@ -15,7 +15,7 @@ end
 
 -- python stuff
 -- 2. Setup Pyright with specific settings (to avoid "noise")
-vim.lsp.enable("pyright", {
+vim.lsp.enable("basedpyright", {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
