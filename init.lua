@@ -35,3 +35,12 @@ require "autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- Autocmd to save the current buffer when leaving insert mode
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = vim.api.nvim_create_augroup("autosave_insert_leave", { clear = true }),
+  callback = function()
+    vim.cmd("silent! write")
+  end,
+})
+
