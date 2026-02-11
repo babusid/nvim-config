@@ -3,7 +3,7 @@ local on_attach = nv_configs.on_attach
 local on_init = nv_configs.on_init
 local capabilities = nv_configs.capabilities
 
--- 1. Setup generic servers (non-python)
+-- 1. Setup generic servers
 local generic_servers = { "html", "cssls" }
 for _, lsp in ipairs(generic_servers) do
   vim.lsp.enable(lsp, {
@@ -33,7 +33,3 @@ vim.lsp.enable("ruff", {
 })
 
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Floating diagnostic" })
-
--- vim.lsp.enable(servers)
-
--- read :h vim.lsp.config for changing options of lsp servers 
