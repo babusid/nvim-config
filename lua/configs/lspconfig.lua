@@ -4,7 +4,7 @@ local on_init = nv_configs.on_init
 local capabilities = nv_configs.capabilities
 
 -- 1. Setup generic servers
-local generic_servers = { "html", "cssls" }
+local generic_servers = { "html", "cssls", "clangd" }
 for _, lsp in ipairs(generic_servers) do
   vim.lsp.enable(lsp, {
     on_attach = on_attach,
