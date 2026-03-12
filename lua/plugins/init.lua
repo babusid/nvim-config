@@ -33,4 +33,8 @@ return {
       return conf
     end,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = require "configs.cmp",
+  },
 }
