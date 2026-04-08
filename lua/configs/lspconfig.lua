@@ -1,24 +1,38 @@
 local nv_configs = require("nvchad.configs.lspconfig")
-local on_attach = nv_configs.on_attach
+local base_on_attach = nv_configs.on_attach
 local on_init = nv_configs.on_init
 local capabilities = nv_configs.capabilities
 
--- 1. Setup generic servers
-local generic_servers = { "html", "cssls", "clangd" }
-for _, lsp in ipairs(generic_servers) do
-  vim.lsp.enable(lsp, {
+local on_attach = function(client, bufnr)
+  base_on_attach(client, bufnr)
+
+  if client:supports_method("textDocument/foldingRange") then
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(bufnr) and vim.api.nvim_get_current_buf() == bufnr then
+        pcall(vim.cmd, "silent! normal! zx")
+      end
+    end)
+  end
+end
+
+local function setup(server, opts)
+  vim.lsp.config(server, vim.tbl_deep_extend("force", {
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
-  })
+  }, opts or {}))
+  vim.lsp.enable(server)
+end
+
+-- 1. Setup generic servers
+local generic_servers = { "html", "cssls", "clangd", "marksman" }
+for _, lsp in ipairs(generic_servers) do
+  setup(lsp)
 end
 
 -- python stuff
 -- 2. Setup Pyright with specific settings (to avoid "noise")
-vim.lsp.enable("basedpyright", {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
+setup("basedpyright", {
   settings = {
     pyright = { disableOrganizeImports = true },
     python = { analysis = { diagnosticMode = "openFilesOnly" } },
@@ -26,10 +40,6 @@ vim.lsp.enable("basedpyright", {
 })
 
 -- Ruff for pylinting
-vim.lsp.enable("ruff", {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-})
+setup("ruff")
 
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Floating diagnostic" })

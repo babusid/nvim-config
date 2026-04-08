@@ -37,4 +37,39 @@ return {
     "hrsh7th/nvim-cmp",
     opts = require "configs.cmp",
   },
+  {
+    "kevinhwang91/promise-async",
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    lazy = false,
+    dependencies = { "kevinhwang91/promise-async" },
+    opts = {
+      provider_selector = function(_, _, _)
+        return { "lsp", "indent" }
+      end,
+    },
+    init = function()
+      vim.opt.foldcolumn = "0"
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldenable = true
+    end,
+    keys = {
+      {
+        "zR",
+        function()
+          require("ufo").openAllFolds()
+        end,
+        desc = "Open all folds",
+      },
+      {
+        "zM",
+        function()
+          require("ufo").closeAllFolds()
+        end,
+        desc = "Close all folds",
+      },
+    },
+  },
 }

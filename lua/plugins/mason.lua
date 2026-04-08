@@ -7,6 +7,7 @@ return {
         "clangd",
         "basedpyright",
         "ruff",
+        "marksman", -- Markdown LSP
         
         -- Formatters (you can add more as needed)
         -- "stylua",  -- lua formatter
