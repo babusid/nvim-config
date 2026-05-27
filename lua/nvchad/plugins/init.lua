@@ -163,9 +163,4 @@ return {
       return require "nvchad.configs.treesitter"
     end,
   },
-
-  {
-    "github/copilot.vim",
-    event = "InsertEnter",
-  },
 }

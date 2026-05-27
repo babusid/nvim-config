@@ -35,6 +35,24 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        dependencies = {
+          {
+            "zbirenbaum/copilot.lua",
+            cmd = "Copilot",
+            opts = {
+              suggestion = { enabled = false },
+              panel = { enabled = false },
+            },
+          },
+        },
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
+    },
     opts = require "configs.cmp",
   },
   {

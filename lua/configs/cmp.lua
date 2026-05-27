@@ -2,20 +2,20 @@ local options = require "nvchad.configs.cmp"
 
 options.sources = options.sources or {}
 
-local has_supermaven = false
+local has_copilot = false
 for _, source in ipairs(options.sources) do
-  if source.name == "supermaven" then
-    has_supermaven = true
+  if source.name == "copilot" then
+    has_copilot = true
     break
   end
 end
 
-if not has_supermaven then
-  table.insert(options.sources, 1, { name = "supermaven" })
+if not has_copilot then
+  table.insert(options.sources, 1, { name = "copilot" })
 end
 
-if vim.fn.hlexists("CmpItemKindSupermaven") == 0 then
-  vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { link = "CmpItemKindSuperMaven" })
+if vim.fn.hlexists("CmpItemKindCopilot") == 0 then
+  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { link = "CmpItemKindFunction" })
 end
 
 return options
