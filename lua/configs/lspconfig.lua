@@ -25,7 +25,7 @@ local function setup(server, opts)
 end
 
 -- 1. Setup generic servers
-local generic_servers = { "html", "cssls", "clangd", "marksman" }
+local generic_servers = { "html", "cssls", "clangd", "marksman", "jdtls" }
 for _, lsp in ipairs(generic_servers) do
   setup(lsp)
 end
