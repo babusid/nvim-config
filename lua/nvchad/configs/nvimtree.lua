@@ -9,10 +9,11 @@ return {
     enable = true,
     update_root = false,
   },
-  view = {
-    width = 30,
-    preserve_window_proportions = true,
-  },
+  --view = {
+  --  width = 30,
+  --  preserve_window_proportions = true,
+  --},
+  view = {adaptive_size = true}, 
   renderer = {
     root_folder_label = false,
     highlight_git = true,
