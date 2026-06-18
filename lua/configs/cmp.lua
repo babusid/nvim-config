@@ -11,7 +11,7 @@ for _, source in ipairs(options.sources) do
 end
 
 if not has_copilot then
-  table.insert(options.sources, 1, { name = "copilot" })
+  table.insert(options.sources, { name = "copilot", group_index = 2 })
 end
 
 if vim.fn.hlexists("CmpItemKindCopilot") == 0 then

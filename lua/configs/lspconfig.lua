@@ -25,10 +25,18 @@ local function setup(server, opts)
 end
 
 -- 1. Setup generic servers
-local generic_servers = { "html", "cssls", "clangd", "marksman", "jdtls" }
+local generic_servers = { "html", "cssls", "clangd", "marksman" }
 for _, lsp in ipairs(generic_servers) do
   setup(lsp)
 end
+
+-- jdtls with lombok javaagent (project uses lombok annotations)
+local lombok_jar = vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar"
+setup("jdtls", {
+  cmd_env = {
+    JDTLS_JVM_ARGS = "-javaagent:" .. lombok_jar,
+  },
+})
 
 -- python stuff
 -- 2. Setup Pyright with specific settings (to avoid "noise")

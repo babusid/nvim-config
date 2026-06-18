@@ -63,7 +63,9 @@ return {
     lazy = false,
     dependencies = { "kevinhwang91/promise-async" },
     opts = {
-      provider_selector = function(_, _, _)
+      provider_selector = function(_, filetype, _)
+        -- jdtls 1.58.0 crashes on foldingRange requests
+        if filetype == "java" then return { "indent" } end
         return { "lsp", "indent" }
       end,
     },
